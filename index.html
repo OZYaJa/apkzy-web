@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>ApkZY Admin Pro</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#06070d;color:#fff;font-family:Arial,Helvetica,sans-serif}
+body{--bg:#06070d;--s:#111522;--s2:#171d2c;--line:#2b344b;--a:#626cff;--b:#a65cff;--muted:#9099ad}
+body[data-theme=aurora]{--bg:#04100e;--s:#0b1a18;--s2:#102621;--line:#245148;--a:#39e6b1;--b:#6697ff}
+body[data-theme=blueprint]{--bg:#06101b;--s:#0b1724;--s2:#102134;--line:#24445f;--a:#43baff;--b:#7c9cff}
+body[data-theme=wave]{--bg:#100719;--s:#1b0d25;--s2:#291333;--line:#51275e;--a:#ff4db7;--b:#765bff}
+body[data-theme=noir]{--bg:#0b0a08;--s:#171511;--s2:#211d17;--line:#514937;--a:#d8b66a;--b:#f2dda7}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 10% 0%,color-mix(in srgb,var(--a) 15%,transparent),transparent 34%),radial-gradient(circle at 90% 20%,color-mix(in srgb,var(--b) 12%,transparent),transparent 38%)}
+body[data-theme=blueprint]:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.12;background-image:linear-gradient(#4dbaff 1px,transparent 1px),linear-gradient(90deg,#4dbaff 1px,transparent 1px);background-size:28px 28px}
+@keyframes pulse{50%{transform:scale(1.025)}}@keyframes float{50%{transform:translateY(-5px)}}@keyframes slide{to{background-position:200% center}}
+.app{max-width:980px;margin:auto;min-height:100vh}
+header{position:sticky;top:0;z-index:30;padding:16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.logo{font-size:29px;font-weight:950}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}.tab,.btn{border:1px solid var(--line);border-radius:15px;padding:13px;background:var(--s2);color:#fff;font-weight:900}.tab.active,.btn.primary{border-color:transparent;background:linear-gradient(120deg,var(--a),var(--b))}
+main{padding:14px}.page{display:none}.page.active{display:block}
+.card{background:linear-gradient(150deg,var(--s),#090b12);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:13px}
+h1{font-size:24px;margin:0 0 7px}h2{font-size:19px;margin:0 0 12px}
+label{display:block;color:var(--muted);font-size:11px;font-weight:900;margin:13px 0 6px;text-transform:uppercase}
+input,textarea{width:100%;background:#080a10;color:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;outline:0}textarea{min-height:80px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.actions .btn{flex:1}.danger{background:#a92d49}.notice,.status{padding:11px 12px;border-radius:13px;background:var(--s2);border:1px solid var(--line);color:#cbd1df;font-size:12px;line-height:1.5}.status{margin-top:8px;color:#48e1a6}
+.themes{display:grid;grid-template-columns:1fr 1fr;gap:9px}.theme{border:2px solid transparent;border-radius:16px;overflow:hidden;background:var(--s2);color:#fff;padding:0;text-align:left}.theme.active{border-color:var(--a)}.art{height:95px}.tname{padding:10px;font-weight:900}
+.dark{background:radial-gradient(circle at 70% 30%,#8554ff55,transparent 28%),linear-gradient(140deg,#060810,#271144)}.aur{background:linear-gradient(120deg,#061712,#0c473d,#12204a)}.blue{background:#081522;background-image:linear-gradient(#4bbcff33 1px,transparent 1px),linear-gradient(90deg,#4bbcff33 1px,transparent 1px);background-size:20px 20px}.wav{background:linear-gradient(120deg,#1b0826,#5b145c,#181044);background-size:200% 200%;animation:slide 5s linear infinite}.noi{background:linear-gradient(135deg,#0d0c09,#493b25)}
+.apk{padding:12px;border:1px solid var(--line);border-radius:17px;background:var(--s2);margin-top:9px}.head{display:flex;gap:10px;align-items:center}.thumb{width:62px;height:62px;border-radius:13px;object-fit:cover;background:#202536}.info{flex:1;min-width:0}.name{font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:11px;color:var(--muted);margin-top:5px}
+.rank{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--line)}.rank:last-child{border:0}.rank img{width:48px;height:48px;object-fit:cover;border-radius:11px}.num{width:25px;font-size:19px;font-weight:950}.count{margin-left:auto;font-weight:900}
+.preview{border:1px solid var(--line);border-radius:20px;overflow:hidden}.hero{padding:24px 16px;background:linear-gradient(120deg,#0a0c13,#20113c)}body[data-theme=aurora] .hero{background:linear-gradient(120deg,#061a16,#0b433a,#101c42)}body[data-theme=blueprint] .hero{background:#081522;background-image:linear-gradient(#4bbcff33 1px,transparent 1px),linear-gradient(90deg,#4bbcff33 1px,transparent 1px);background-size:25px 25px}body[data-theme=wave] .hero{background:linear-gradient(120deg,#1b0825,#62155e,#171044);background-size:200% 200%;animation:slide 6s linear infinite}body[data-theme=noir] .hero{text-align:center;background:linear-gradient(135deg,#0d0c09,#403522)}
+.hero h1{font-size:30px}.hero p{color:var(--muted);line-height:1.5}.brand{padding:13px}.searchrow{display:flex;gap:8px}.searchrow input{flex:1}.cats{display:flex;gap:7px;overflow:auto;padding:10px 0}.cat{white-space:nowrap;padding:9px 12px;border-radius:11px;background:var(--s2);border:1px solid var(--line);color:#fff;font-weight:800}.cat.active{background:linear-gradient(120deg,var(--a),var(--b));border-color:transparent}.podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:7px;align-items:end}.pod{padding:8px;text-align:center;background:var(--s2);border:1px solid var(--line);border-radius:14px}.pod.first{animation:pulse 2.2s infinite}.pod img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}.pod b{display:block;font-size:12px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.item{background:var(--s);border:1px solid var(--line);border-radius:16px;padding:10px;overflow:hidden}.item img{width:100%;aspect-ratio:1/.68;object-fit:cover;border-radius:11px;background:#191d27}.item h3{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.download{display:block;text-align:center;padding:9px;border-radius:10px;background:linear-gradient(120deg,var(--a),var(--b));color:#fff;text-decoration:none;font-weight:900;font-size:12px}.empty{text-align:center;padding:25px;color:var(--muted)}.footer{text-align:center;color:var(--muted);font-size:10px;padding:20px}
+body[data-theme=blueprint] .card{border-radius:9px}body[data-theme=noir] .card{border-radius:7px}body[data-theme=noir] .item{border-radius:4px}body[data-theme=wave] .item{transform:skewY(-.4deg)}body[data-theme=aurora] .item{animation:float 5s ease-in-out infinite}
+@media(max-width:560px){.row,.themes{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body data-theme="darkweb">
+<div class="app">
+<header><div class="logo">ApkZY</div><div class="sub">ADMIN PANEL • DRAFT • PUBLISH • SYNC</div>
+<div class="tabs"><button id="tSet" class="tab active" onclick="page('settings')">PENGATURAN</button><button id="tBrand" class="tab" onclick="page('brand')">CEK BRANDA</button></div></header>
+<main>
+<section id="settings" class="page active">
+<div class="card"><h1>Pengaturan Branda</h1><div class="notice">Semua perubahan masuk <b>Draft</b>. Branda aktif hanya berubah setelah <b>Publish</b>.</div>
+<label>Nama Branda</label><input id="webName" placeholder="Nama website">
+<label>Deskripsi</label><textarea id="webDesc"></textarea><label>Detail</label><textarea id="webDetails"></textarea>
+<label>Teks tombol download</label><input id="downloadText" value="DOWNLOAD"><label>Footer</label><input id="footer">
+<label>Tema PRO — 5 identitas visual</label><div id="themes" class="themes"></div></div>
+
+<div class="card"><h2>Tambah / Edit APK</h2><div id="imgBox" style="width:85px;height:85px;border:1px dashed var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--muted);overflow:hidden">APK</div>
+<label>Pilih gambar</label><label style="display:inline-block;background:var(--s2);color:#fff;padding:11px;border-radius:12px">PILIH DARI GALERI<input id="file" type="file" accept="image/*" style="display:none" onchange="pick(this)"></label>
+<input id="editId" type="hidden"><label>Nama APK</label><input id="apkName" placeholder="Nama APK">
+<div class="row"><div><label>Kategori</label><input id="apkCat" placeholder="Contoh: Tools"></div><div><label>Download</label><input id="apkCount" type="number" min="0" value="0"></div></div>
+<label>Link Download / Halaman</label><input id="apkUrl" placeholder="https://...">
+<div class="actions"><button class="btn primary" onclick="saveApk()">SIMPAN APK</button><button class="btn" onclick="resetApk()">BARU / BATAL</button></div><div id="apkMsg" class="status"></div></div>
+
+<div class="card"><h2>Semua APK <span id="total" style="color:var(--muted);font-size:12px"></span></h2><div id="list"></div></div>
+<div class="card"><h2>Top Downloads</h2><div id="top"></div></div>
+<div class="card"><h2>Publikasi & Sinkronisasi</h2><div id="syncInfo" class="notice"></div>
+<button class="btn primary" style="width:100%;margin-top:9px" onclick="publish()">SIMPAN & PUBLISHKAN</button>
+<button class="btn" style="width:100%;margin-top:8px" onclick="saveDraft()">SIMPAN DRAFT SAJA</button><div id="pubMsg" class="status"></div></div>
+</section>
+
+<section id="brand" class="page"><div class="card" style="padding:9px"><h1 style="padding:7px">Branda Published</h1><div class="notice" style="margin:7px">Ini menampilkan <b>Published</b>. Draft belum mengubah tampilan ini.</div><div id="brandView"></div></div></section>
+</main></div>
+
+<script>
+const THEMES=[['darkweb','DarkWeb PRO','dark'],['aurora','Aurora Motion','aur'],['blueprint','Blueprint Tech','blue'],['wave','Neon Wave','wav'],['noir','Premium Noir','noi']];
+let state={draft:{settings:{name:'ApkZY',desc:'',details:'',downloadText:'DOWNLOAD',footer:'ApkZY',theme:'darkweb'},apks:[]},published:{settings:{name:'ApkZY',desc:'',details:'',downloadText:'DOWNLOAD',footer:'ApkZY',theme:'darkweb'},apks:[]}};
+let imgPending=null, cache={};
+
+function bridge(n,...a){try{return window.ApkZY&&typeof window.ApkZY[n]=='function'?window.ApkZY[n](...a):null}catch(e){return null}}
+function esc(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+function src(v){if(!v)return '';if(v.startsWith('data:'))return v;if(v.startsWith('img://')){if(!cache[v])cache[v]=bridge('readImage',v.slice(6))||'';return cache[v]}return v}
+function persist(){bridge('saveState',JSON.stringify(state));try{localStorage.setItem('apkzy_state',JSON.stringify(state))}catch(e){}}
+function load(){let x=bridge('loadState');if(x){try{state=JSON.parse(x)}catch(e){}}if(!state.draft)state.draft={settings:{},apks:[]};if(!state.published)state.published=JSON.parse(JSON.stringify(state.draft));if(!state.draft.settings)state.draft.settings={};if(!state.published.settings)state.published.settings={};fill();renderThemes();renderList();renderTop();renderBrand();syncInfo.innerHTML='Status lokal: <b>SIAP</b><br>Draft APK: '+state.draft.apks.length+' • Published APK: '+state.published.apks.length}
+function fill(){let s=state.draft.settings;webName.value=s.name||'ApkZY';webDesc.value=s.desc||'';webDetails.value=s.details||'';downloadText.value=s.downloadText||'DOWNLOAD';footer.value=s.footer||'';document.body.dataset.theme=s.theme||'darkweb'}
+function collect(){let s=state.draft.settings;s.name=webName.value.trim()||'ApkZY';s.desc=webDesc.value.trim();s.details=webDetails.value.trim();s.downloadText=downloadText.value.trim()||'DOWNLOAD';s.footer=footer.value.trim()}
+function page(p){settings.classList.toggle('active',p==='settings');brand.classList.toggle('active',p==='brand');tSet.classList.toggle('active',p==='settings');tBrand.classList.toggle('active',p==='brand');if(p==='brand')renderBrand();scrollTo(0,0)}
+function renderThemes(){themes.innerHTML=THEMES.map(t=>`<button class="theme ${state.draft.settings.theme===t[0]?'active':''}" onclick="theme('${t[0]}')"><div class="art ${t[2]}"></div><div class="tname">${t[1]}</div></button>`).join('')}
+function theme(id){collect();state.draft.settings.theme=id;document.body.dataset.theme=id;renderThemes();persist()}
+function pick(input){let f=input.files&&input.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{let im=new Image();im.onload=()=>{let z=Math.min(1,1100/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*z);c.height=Math.round(im.height*z);c.getContext('2d').drawImage(im,0,0,c.width,c.height);let d=c.toDataURL('image/jpeg',.82),id=bridge('saveImageData',d);imgPending=id?'img://'+id:d;imgBox.innerHTML='<img style="width:100%;height:100%;object-fit:cover" src="'+esc(src(imgPending)||d)+'">' };im.src=r.result};r.readAsDataURL(f)}
+function saveApk(){let n=apkName.value.trim(),u=apkUrl.value.trim();if(!n||!u){apkMsg.textContent='Nama dan link wajib diisi.';return}if(!/^https?:\/\//i.test(u)){apkMsg.textContent='Link harus http:// atau https://';return}collect();let id=editId.value||'apk_'+Date.now()+'_'+Math.random().toString(36).slice(2),a=state.draft.apks.find(x=>x.id===id),fresh=!a;if(!a)a={id};a.name=n;a.category=apkCat.value.trim();a.downloads=Math.max(0,parseInt(apkCount.value||0,10)||0);a.url=u;a.updatedAt=Date.now();if(fresh)a.createdAt=Date.now();if(imgPending){a.image=imgPending;imgPending=null}state.draft.apks=fresh?state.draft.apks.concat([a]):state.draft.apks.map(x=>x.id===id?a:x);persist();renderList();renderTop();resetApk();apkMsg.textContent='APK tersimpan di Draft.';syncInfo.innerHTML='Status lokal: <b>SIAP</b><br>Draft APK: '+state.draft.apks.length+' • Published APK: '+state.published.apks.length}
+function resetApk(){editId.value='';apkName.value='';apkCat.value='';apkCount.value=0;apkUrl.value='';imgPending=null;imgBox.textContent='APK'}
+function edit(id){let a=state.draft.apks.find(x=>x.id===id);if(!a)return;editId.value=a.id;apkName.value=a.name;apkCat.value=a.category||'';apkCount.value=a.downloads||0;apkUrl.value=a.url;imgPending=null;imgBox.innerHTML=a.image?'<img style="width:100%;height:100%;object-fit:cover" src="'+esc(src(a.image))+'">':'APK';scrollTo(0,0)}
+function del(id){if(!confirm('Hapus APK dari Draft?'))return;state.draft.apks=state.draft.apks.filter(x=>x.id!==id);persist();renderList();renderTop()}
+function renderList(){total.textContent='('+state.draft.apks.length+' APK)';if(!state.draft.apks.length){list.innerHTML='<div class="empty">Belum ada APK.</div>';return}list.innerHTML=state.draft.apks.map(a=>`<div class="apk"><div class="head">${a.image?'<img class="thumb" src="'+esc(src(a.image))+'">':'<div class="thumb"></div>'}<div class="info"><div class="name">${esc(a.name)}</div><div class="meta">${esc(a.category||'Tanpa kategori')} • ${a.downloads||0} download</div></div></div><div class="actions"><button class="btn primary" onclick="edit('${esc(a.id)}')">EDIT</button><button class="btn danger" onclick="del('${esc(a.id)}')">HAPUS</button></div></div>`).join('')}
+function renderTop(){let a=[...state.draft.apks].sort((x,y)=>(y.downloads||0)-(x.downloads||0)).slice(0,3);top.innerHTML=a.length?a.map((x,i)=>`<div class="rank">${x.image?'<img src="'+esc(src(x.image))+'">':'<div style="width:48px;height:48px"></div>'}<div class="num">${i+1}</div><div><b>${esc(x.name)}</b><div class="meta">${esc(x.category||'')}</div></div><div class="count">${x.downloads||0}</div></div>`).join(''):'<div class="empty">Belum ada Top Downloads.</div>'}
+function saveDraft(){collect();persist();pubMsg.textContent='Draft disimpan. Branda Published tetap.'}
+function publish(){collect();state.published=JSON.parse(JSON.stringify(state.draft));state.published.publishedAt=Date.now();persist();renderBrand();pubMsg.textContent='Publish berhasil. Branda sudah menggunakan Draft terbaru.';syncInfo.innerHTML='Status lokal: <b>PUBLISHED</b><br>APK Published: '+state.published.apks.length}
+function cats(a){return [...new Set(a.map(x=>(x.category||'').trim()).filter(Boolean))]}
+function renderBrand(){let s=state.published.settings||{},all=state.published.apks||[],q='',cat='ALL';document.body.dataset.theme=s.theme||'darkweb';
+function draw(){let list=all.filter(a=>(!q||a.name.toLowerCase().includes(q.toLowerCase()))&&(cat==='ALL'||cat==='NEW'||(a.category||'')===cat));if(cat==='NEW')list.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));let c=cats(all),top3=[...all].sort((a,b)=>(b.downloads||0)-(a.downloads||0)).slice(0,3);let pod=top3.length?`<div class="podium">${[1,0,2].filter(i=>top3[i]).map(i=>`<div class="pod ${i===0?'first':''}">${top3[i].image?'<img src="'+esc(src(top3[i].image))+'">':''}<b>${esc(top3[i].name)}</b><small>${top3[i].downloads||0} download</small></div>`).join('')}</div>`:'<div class="empty">Belum ada data Top Downloads.</div>';let cards=list.length?`<div class="grid">${list.map(a=>`<div class="item">${a.image?'<img src="'+esc(src(a.image))+'">':'<div style="aspect-ratio:1/.68;background:var(--s2);border-radius:11px"></div>'}<h3>${esc(a.name)}</h3><div class="meta">${esc(a.category||'Tanpa kategori')} • ${a.downloads||0}</div><a class="download" href="#" onclick="openLink('${esc(a.url)}');return false">${esc(s.downloadText||'DOWNLOAD')}</a></div>`).join('')}</div>`:'<div class="empty">Tidak ada APK.</div>';
+brandView.innerHTML=`<div class="preview"><div class="hero"><h1>${esc(s.name||'ApkZY')}</h1><p>${esc(s.desc||'')}</p>${s.details?'<p>'+esc(s.details)+'</p>':''}</div><div class="brand"><div class="searchrow"><input id="bs" placeholder="Cari nama APK..." value="${esc(q)}"><button class="btn primary" onclick="searchBrand()">CARI</button></div><div class="cats"><button class="cat ${cat==='ALL'?'active':''}" onclick="filterBrand('ALL')">Semua APK</button><button class="cat ${cat==='NEW'?'active':''}" onclick="filterBrand('NEW')">APK Terbaru</button>${c.map(x=>`<button class="cat ${cat===x?'active':''}" onclick="filterBrand('${esc(x)}')">${esc(x)}</button>`).join('')}</div><h2>Top Downloads</h2>${pod}<h2 style="margin-top:18px">${cat==='NEW'?'APK Terbaru':cat==='ALL'?'Semua APK':esc(cat)}</h2>${cards}<div class="footer">${esc(s.footer||'')}</div></div></div>`}
+window.filterBrand=v=>{cat=v;draw()};window.searchBrand=()=>{q=(document.getElementById('bs')||{}).value||'';draw()};draw()}
+function openLink(u){bridge('openUrl',u)}
+window.addEventListener('load',load);
+</script>
+</body>
+</html>
